@@ -8,50 +8,11 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/skratchdot/open-golang/open"
-
 	"github.com/NebulousLabs/Sia/crypto"
 	"github.com/NebulousLabs/Sia/modules"
 	"github.com/NebulousLabs/Sia/types"
 	"github.com/NebulousLabs/fastrand"
 )
-
-const outputTmpl = `
-<html>
-	<head>
-		<title> Sia Cold Storage </title>
-	</head>
-	<style>
-		body {
-			font-family: "Gotham A", "Gotham B", Helvetica, Arial, sans-serif;
-			margin-left: auto;
-			margin-right: auto;
-			max-width: 900px;
-			text-align: center;
-		}
-		.info {
-			margin-top: 75px;
-		}
-	</style>
-	<body>
-		<h3>Sia cold wallet successfully generated.</h3>
-		<p> Please save the information below in a safe place. You can use the Seed to recover any money sent to any of the addresses, without an online or synced wallet. Make sure to keep the seed safe, and secret.</p>
-		<section class="info">
-			<section class="seed">
-				<h4>Seed: </h4>
-				<p>{{.Seed}}</p>
-			</section>
-			<section class="addresses">
-				<h4>Addresses: </h4>
-				<ul>
-				{{ range .Addresses }}
-					<li>{{.}}</li>
-				{{ end }}
-			</section>
-		</section>
-	</body>
-</html>
-`
 
 const nAddresses = 20
 
@@ -102,7 +63,7 @@ func main() {
 	})
 	go http.Serve(l, handler)
 
-	err = open.Run("http://localhost:8087")
+	// err = open.Run("http://localhost:8087")
 	if err != nil {
 		// fallback to console, clean up the server and exit
 		l.Close()
