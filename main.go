@@ -46,7 +46,7 @@ func main() {
 		Seed:      seedStr,
 		Addresses: addresses,
 	}
-	t, err := template.New("output").Parse(outputTmpl)
+	t, err := template.New("output").ParseFiles("./templates/secret.html")
 	if err != nil {
 		log.Fatal(err)
 	}
