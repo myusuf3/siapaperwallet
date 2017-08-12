@@ -1,0 +1,92 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "4VtV9Y/POIVtrYkSLEvKJL0UD/c=",
+			"path": "github.com/NebulousLabs/Sia/build",
+			"revision": "36c46a5b8c7183c5b8fa0db10b74e95195f7e77b",
+			"revisionTime": "2017-07-18T20:20:12Z"
+		},
+		{
+			"checksumSHA1": "zpZ4pHoRIA/tbYAwa6jDgJS4prc=",
+			"path": "github.com/NebulousLabs/Sia/crypto",
+			"revision": "36c46a5b8c7183c5b8fa0db10b74e95195f7e77b",
+			"revisionTime": "2017-07-18T20:20:12Z"
+		},
+		{
+			"checksumSHA1": "VcMOvbRYfNwkXE5pCd6q4oyUtXA=",
+			"path": "github.com/NebulousLabs/Sia/encoding",
+			"revision": "36c46a5b8c7183c5b8fa0db10b74e95195f7e77b",
+			"revisionTime": "2017-07-18T20:20:12Z"
+		},
+		{
+			"checksumSHA1": "dGCKrZ7DpUiyZCxjUbW4NFUeHWI=",
+			"path": "github.com/NebulousLabs/Sia/modules",
+			"revision": "36c46a5b8c7183c5b8fa0db10b74e95195f7e77b",
+			"revisionTime": "2017-07-18T20:20:12Z"
+		},
+		{
+			"checksumSHA1": "ZBpck5E1bbIy0rnYywCLwercvEY=",
+			"path": "github.com/NebulousLabs/Sia/types",
+			"revision": "36c46a5b8c7183c5b8fa0db10b74e95195f7e77b",
+			"revisionTime": "2017-07-18T20:20:12Z"
+		},
+		{
+			"checksumSHA1": "H8Hq367L0F+0UKZJTXt8bI0zex8=",
+			"path": "github.com/NebulousLabs/entropy-mnemonics",
+			"revision": "7b01a644a63680b90de22bacfb11d832e944eaab",
+			"revisionTime": "2017-03-16T01:29:07Z"
+		},
+		{
+			"checksumSHA1": "lJu971+H7OnvKkGXYFpMRPlgnEs=",
+			"path": "github.com/NebulousLabs/fastrand",
+			"revision": "60b615657d85339c105efb2170327a2d948d4b17",
+			"revisionTime": "2017-05-12T20:08:28Z"
+		},
+		{
+			"checksumSHA1": "CJjtHp1b8AURkbn74nNsRuKC0Qc=",
+			"path": "github.com/NebulousLabs/merkletree",
+			"revision": "9aa7ce56e83cb5f244ff08807250866e5f04ce5a",
+			"revisionTime": "2017-01-19T18:04:13Z"
+		},
+		{
+			"checksumSHA1": "tUkP7ucLzufJtpQkBd1Bxtz2auc=",
+			"path": "golang.org/x/crypto/blake2b",
+			"revision": "b07d8c96772f426812d3fc5530710ec1f3b205e7",
+			"revisionTime": "2016-10-26T23:47:36Z"
+		},
+		{
+			"checksumSHA1": "wGb//LjBPNxYHqk+dcLo7BjPXK8=",
+			"path": "golang.org/x/crypto/ed25519",
+			"revision": "b07d8c96772f426812d3fc5530710ec1f3b205e7",
+			"revisionTime": "2016-10-26T23:47:36Z"
+		},
+		{
+			"checksumSHA1": "LXFcVx8I587SnWmKycSDEq9yvK8=",
+			"path": "golang.org/x/crypto/ed25519/internal/edwards25519",
+			"revision": "b07d8c96772f426812d3fc5530710ec1f3b205e7",
+			"revisionTime": "2016-10-26T23:47:36Z"
+		},
+		{
+			"checksumSHA1": "GRDX508ZNSjrly80GO+ckI6kztA=",
+			"origin": "github.com/NebulousLabs/Sia/vendor/golang.org/x/crypto/twofish",
+			"path": "golang.org/x/crypto/twofish",
+			"revision": "36c46a5b8c7183c5b8fa0db10b74e95195f7e77b",
+			"revisionTime": "2017-07-18T20:20:12Z"
+		},
+		{
+			"checksumSHA1": "ziMb9+ANGRJSSIuxYdRbA+cDRBQ=",
+			"path": "golang.org/x/text/transform",
+			"revision": "836efe42bb4aa16aaa17b9c155d8813d336ed720",
+			"revisionTime": "2017-07-09T00:38:22Z"
+		},
+		{
+			"checksumSHA1": "Anof4bt0AU+Sa3R8Rq0KBnlpbaQ=",
+			"path": "golang.org/x/text/unicode/norm",
+			"revision": "836efe42bb4aa16aaa17b9c155d8813d336ed720",
+			"revisionTime": "2017-07-09T00:38:22Z"
+		}
+	],
+	"rootPath": "github.com/myusuf3/siapaperwallet"
+}
