@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"html/template"
 	"log"
-	"net"
 	"net/http"
 	"os"
 
@@ -12,6 +11,7 @@ import (
 	"github.com/NebulousLabs/Sia/modules"
 	"github.com/NebulousLabs/Sia/types"
 	"github.com/NebulousLabs/fastrand"
+	"github.com/gorilla/mux"
 )
 
 const nAddresses = 20
@@ -21,8 +21,6 @@ type Secret struct {
 	Addresses []types.UnlockHash
 }
 
-// getAddress returns an address generated from a seed at the index specified
-// by `index`.
 func getAddress(seed modules.Seed, index uint64) types.UnlockHash {
 	_, pk := crypto.GenerateKeyPairDeterministic(crypto.HashAll(seed, index))
 	return types.UnlockConditions{
@@ -51,34 +49,30 @@ func GenerateNewSeedAddress() (*Secret, error) {
 	return templateData, nil
 }
 
-func main() {
+func YourHandler(w http.ResponseWriter, r *http.Request) {
+	t := template.Must(template.ParseFiles("templates/secret.html"))
+	templateData, err := GenerateNewSeedAddress()
+	if err != nil {
+		log.Fatal(err)
+	}
+	t.Execute(w, templateData)
+}
 
+// getAddress returns an address generated from a seed at the index specified
+// by `index`.
+
+func main() {
+	r := mux.NewRouter()
+	// Routes consist of a path and a handler function.
+	r.HandleFunc("/", YourHandler)
 	var port string
 	port = os.Getenv("PORT")
 
 	if port == "" {
 		port = "8080"
 	}
-
-	// generate a seed and a few addresses from that seed
-
-	t := template.Must(template.ParseFiles("templates/secret.html"))
 	domain := fmt.Sprintf(":%s", port)
 	log.Print(domain)
-	l, err := net.Listen("tcp", domain)
-	if err != nil {
-		log.Print(err)
-	}
-
-	done := make(chan struct{})
-	handler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		templateData, err := GenerateNewSeedAddress()
-		if err != nil {
-			log.Fatal(err)
-		}
-		t.Execute(w, templateData)
-		l.Close()
-	})
-	go http.Serve(l, handler)
-	<-done
+	// Bind to a port and pass our router in
+	log.Fatal(http.ListenAndServe(domain, r))
 }
