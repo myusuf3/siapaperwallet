@@ -1,10 +1,12 @@
 package main
 
 import (
+	"fmt"
 	"html/template"
 	"log"
 	"net"
 	"net/http"
+	"os"
 
 	"github.com/NebulousLabs/Sia/crypto"
 	"github.com/NebulousLabs/Sia/modules"
@@ -50,10 +52,14 @@ func GenerateNewSeedAddress() (*Secret, error) {
 }
 
 func main() {
+
+	port := os.Getenv("PORT")
+
 	// generate a seed and a few addresses from that seed
 
 	t := template.Must(template.ParseFiles("templates/secret.html"))
-	l, err := net.Listen("tcp", "localhost:8087")
+	domain := fmt.Sprintf(":%s", port)
+	l, err := net.Listen("tcp", domain)
 	if err != nil {
 		log.Print(err)
 	}
