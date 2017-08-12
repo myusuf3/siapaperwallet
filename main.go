@@ -25,6 +25,7 @@ type AddressPair struct {
 
 type Secret struct {
 	Seed         string
+	SeedImage    string
 	AddressPairs []AddressPair
 }
 
@@ -40,16 +41,22 @@ func GenerateNewSeedAddress() (*Secret, error) {
 	var seed modules.Seed
 	fastrand.Read(seed[:])
 	var addressesPairs []AddressPair
+	var png []byte
 	seedStr, err := modules.SeedToString(seed, "english")
 	if err != nil {
 		log.Print(err)
 		return nil, err
 	}
+	png, err = qrcode.Encode(seedStr, qrcode.Low, 256)
+	if err != nil {
+		log.Fatal(err)
+	}
+	seedImage := base64.StdEncoding.EncodeToString(png)
+
 	for i := uint64(0); i < nAddresses; i++ {
 		address := getAddress(seed, i)
 
-		var png []byte
-		png, err := qrcode.Encode(address.String(), qrcode.Medium, 256)
+		png, err := qrcode.Encode(address.String(), qrcode.Low, 256)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -63,6 +70,7 @@ func GenerateNewSeedAddress() (*Secret, error) {
 
 	templateData := &Secret{
 		Seed:         seedStr,
+		SeedImage:    seedImage,
 		AddressPairs: addressesPairs,
 	}
 	return templateData, nil
