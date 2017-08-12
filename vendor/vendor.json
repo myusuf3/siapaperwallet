@@ -51,6 +51,18 @@
 			"revisionTime": "2017-01-19T18:04:13Z"
 		},
 		{
+			"checksumSHA1": "iIUYZyoanCQQTUaWsu8b+iOSPt4=",
+			"path": "github.com/gorilla/context",
+			"revision": "1c83b3eabd45b6d76072b66b746c20815fb2872d",
+			"revisionTime": "2015-08-20T05:12:45Z"
+		},
+		{
+			"checksumSHA1": "8jXj6IMkk1B0LdIYgVG5Vn01/NU=",
+			"path": "github.com/gorilla/mux",
+			"revision": "ee1815431e497d3850809578c93ab6705f1a19f7",
+			"revisionTime": "2015-08-20T05:15:06Z"
+		},
+		{
 			"checksumSHA1": "tUkP7ucLzufJtpQkBd1Bxtz2auc=",
 			"path": "golang.org/x/crypto/blake2b",
 			"revision": "b07d8c96772f426812d3fc5530710ec1f3b205e7",
