@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/base64"
 	"fmt"
 	"html/template"
 	"log"
@@ -12,13 +13,15 @@ import (
 	"github.com/NebulousLabs/Sia/types"
 	"github.com/NebulousLabs/fastrand"
 	"github.com/gorilla/mux"
+	"github.com/skip2/go-qrcode"
 )
 
 const nAddresses = 20
 
 type Secret struct {
-	Seed      string
-	Addresses []types.UnlockHash
+	Seed         string
+	Addresses    []types.UnlockHash
+	AddressImage []string
 }
 
 func getAddress(seed modules.Seed, index uint64) types.UnlockHash {
@@ -33,18 +36,28 @@ func GenerateNewSeedAddress() (*Secret, error) {
 	var seed modules.Seed
 	fastrand.Read(seed[:])
 	var addresses []types.UnlockHash
+	var imageAddresses []string
 	seedStr, err := modules.SeedToString(seed, "english")
 	if err != nil {
 		log.Print(err)
 		return nil, err
 	}
 	for i := uint64(0); i < nAddresses; i++ {
-		addresses = append(addresses, getAddress(seed, i))
+		address := getAddress(seed, i)
+		addresses = append(addresses, address)
+		var png []byte
+		png, err := qrcode.Encode(address.String(), qrcode.Medium, 256)
+		if err != nil {
+			log.Fatal(err)
+		}
+		imageAddress := base64.StdEncoding.EncodeToString(png)
+		imageAddresses = append(imageAddresses, imageAddress)
 	}
 
 	templateData := &Secret{
-		Seed:      seedStr,
-		Addresses: addresses,
+		Seed:         seedStr,
+		Addresses:    addresses,
+		AddressImage: imageAddresses,
 	}
 	return templateData, nil
 }
