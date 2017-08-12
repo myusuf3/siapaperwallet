@@ -1,9 +1,9 @@
 {
 	"comment": "",
-	"ignore": "test",
 	"heroku": {
-        "goVersion": "go1.8"
-    },
+		"goVersion": "go1.8"
+	},
+	"ignore": "test",
 	"package": [
 		{
 			"checksumSHA1": "4VtV9Y/POIVtrYkSLEvKJL0UD/c=",
@@ -64,6 +64,24 @@
 			"path": "github.com/gorilla/mux",
 			"revision": "ee1815431e497d3850809578c93ab6705f1a19f7",
 			"revisionTime": "2015-08-20T05:15:06Z"
+		},
+		{
+			"checksumSHA1": "1rIqxle3DD0DL8CpoVXb0KgayCw=",
+			"path": "github.com/skip2/go-qrcode",
+			"revision": "0bb60b5a716144fa55da373bab578cca49a537d7",
+			"revisionTime": "2017-04-04T20:54:33Z"
+		},
+		{
+			"checksumSHA1": "xkuxp8PnGrQUsIXMiIOCk4U5IGw=",
+			"path": "github.com/skip2/go-qrcode/bitset",
+			"revision": "0bb60b5a716144fa55da373bab578cca49a537d7",
+			"revisionTime": "2017-04-04T20:54:33Z"
+		},
+		{
+			"checksumSHA1": "UtPg/z5chOpfiJvr29Or0oUx1Bs=",
+			"path": "github.com/skip2/go-qrcode/reedsolomon",
+			"revision": "0bb60b5a716144fa55da373bab578cca49a537d7",
+			"revisionTime": "2017-04-04T20:54:33Z"
 		},
 		{
 			"checksumSHA1": "tUkP7ucLzufJtpQkBd1Bxtz2auc=",
