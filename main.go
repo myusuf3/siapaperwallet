@@ -53,12 +53,18 @@ func GenerateNewSeedAddress() (*Secret, error) {
 
 func main() {
 
-	port := os.Getenv("PORT")
+	var port string
+	port = os.Getenv("PORT")
+
+	if port == "" {
+		port = "8080"
+	}
 
 	// generate a seed and a few addresses from that seed
 
 	t := template.Must(template.ParseFiles("templates/secret.html"))
 	domain := fmt.Sprintf(":%s", port)
+	log.Print(domain)
 	l, err := net.Listen("tcp", domain)
 	if err != nil {
 		log.Print(err)
