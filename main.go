@@ -77,6 +77,10 @@ func YourHandler(w http.ResponseWriter, r *http.Request) {
 	t.Execute(w, templateData)
 }
 
+func LoaderHandler(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("loaderio-6b41e5868c37b084abcf848f4f65cd3b"))
+}
+
 // getAddress returns an address generated from a seed at the index specified
 // by `index`.
 
@@ -84,6 +88,7 @@ func main() {
 	r := mux.NewRouter()
 	// Routes consist of a path and a handler function.
 	r.HandleFunc("/", YourHandler)
+	r.HandleFunc("/loaderio-6b41e5868c37b084abcf848f4f65cd3b/", LoaderHandler)
 	var port string
 	port = os.Getenv("PORT")
 
