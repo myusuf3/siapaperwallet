@@ -18,10 +18,14 @@ import (
 
 const nAddresses = 20
 
+type AddressPair struct {
+	Address      types.UnlockHash
+	AddressImage string
+}
+
 type Secret struct {
 	Seed         string
-	Addresses    []types.UnlockHash
-	AddressImage []string
+	AddressPairs []AddressPair
 }
 
 func getAddress(seed modules.Seed, index uint64) types.UnlockHash {
@@ -35,8 +39,7 @@ func getAddress(seed modules.Seed, index uint64) types.UnlockHash {
 func GenerateNewSeedAddress() (*Secret, error) {
 	var seed modules.Seed
 	fastrand.Read(seed[:])
-	var addresses []types.UnlockHash
-	var imageAddresses []string
+	var addressesPairs []AddressPair
 	seedStr, err := modules.SeedToString(seed, "english")
 	if err != nil {
 		log.Print(err)
@@ -44,20 +47,23 @@ func GenerateNewSeedAddress() (*Secret, error) {
 	}
 	for i := uint64(0); i < nAddresses; i++ {
 		address := getAddress(seed, i)
-		addresses = append(addresses, address)
+
 		var png []byte
 		png, err := qrcode.Encode(address.String(), qrcode.Medium, 256)
 		if err != nil {
 			log.Fatal(err)
 		}
 		imageAddress := base64.StdEncoding.EncodeToString(png)
-		imageAddresses = append(imageAddresses, imageAddress)
+		addressPair := AddressPair{
+			Address:      address,
+			AddressImage: imageAddress,
+		}
+		addressesPairs = append(addressesPairs, addressPair)
 	}
 
 	templateData := &Secret{
 		Seed:         seedStr,
-		Addresses:    addresses,
-		AddressImage: imageAddresses,
+		AddressPairs: addressesPairs,
 	}
 	return templateData, nil
 }
