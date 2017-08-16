@@ -29,6 +29,19 @@ type Secret struct {
 	AddressPairs []AddressPair
 }
 
+func HandleWalletGenerator(w http.ResponseWriter, r *http.Request) {
+	t := template.Must(template.ParseFiles("templates/secret.html"))
+	templateData, err := GenerateNewSeedAddress()
+	if err != nil {
+		log.Fatal(err)
+	}
+	t.Execute(w, templateData)
+}
+
+func HandleHome(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("Hi! Keep it moving.\n"))
+}
+
 func RedirectToHTTPSRouter(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 		proto := req.Header.Get("x-forwarded-proto")
@@ -89,15 +102,6 @@ func GenerateNewSeedAddress() (*Secret, error) {
 	return templateData, nil
 }
 
-func YourHandler(w http.ResponseWriter, r *http.Request) {
-	t := template.Must(template.ParseFiles("templates/secret.html"))
-	templateData, err := GenerateNewSeedAddress()
-	if err != nil {
-		log.Fatal(err)
-	}
-	t.Execute(w, templateData)
-}
-
 func LoaderHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("loaderio-6b41e5868c37b084abcf848f4f65cd3b"))
 }
@@ -108,8 +112,8 @@ func LoaderHandler(w http.ResponseWriter, r *http.Request) {
 func main() {
 	r := mux.NewRouter()
 	// Routes consist of a path and a handler function.
-	r.HandleFunc("/", YourHandler)
-	r.HandleFunc("/loaderio-6b41e5868c37b084abcf848f4f65cd3b/", LoaderHandler)
+	r.HandleFunc("/", HandleHome)
+	r.HandleFunc("/wallet/", HandleWalletGenerator)
 	var port string
 	port = os.Getenv("PORT")
 
