@@ -29,6 +29,19 @@ type Secret struct {
 	AddressPairs []AddressPair
 }
 
+func RedirectToHTTPSRouter(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+		proto := req.Header.Get("x-forwarded-proto")
+		if proto == "http" || proto == "HTTP" {
+			http.Redirect(res, req, fmt.Sprintf("https://%s%s", req.Host, req.URL), http.StatusPermanentRedirect)
+			return
+		}
+
+		next.ServeHTTP(res, req)
+
+	})
+}
+
 func getAddress(seed modules.Seed, index uint64) types.UnlockHash {
 	_, pk := crypto.GenerateKeyPairDeterministic(crypto.HashAll(seed, index))
 	return types.UnlockConditions{
@@ -105,6 +118,8 @@ func main() {
 	}
 	domain := fmt.Sprintf(":%s", port)
 	log.Print(domain)
+
+	finalRouter := RedirectToHTTPSRouter(r)
 	// Bind to a port and pass our router in
-	log.Fatal(http.ListenAndServe(domain, r))
+	log.Fatal(http.ListenAndServe(domain, finalRouter))
 }
