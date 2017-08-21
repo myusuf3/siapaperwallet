@@ -47,6 +47,7 @@
         display: block;
         width: 75%;
         margin: auto;
+        overflow-wrap: break-word;
       }
       .generate-wallet-btn {
         color: white;
@@ -98,11 +99,29 @@
       .break-mobile {
         display: none;
       }
+      .mobile-address-hr {
+        display: none;
+      }
 
       @media (max-width: 750px) {
         .break-mobile {
           display: block;
         }
+        .mobile-address-hr {
+          display: block;
+          margin-top: 2rem;
+          max-width: 200px;
+          border: 2px solid rgba(74, 74, 74, 1);
+          border-top: 0;
+          opacity: 0.1;
+        }
+        .info { text-align: center; }
+        .info .media {
+          display: block;
+          text-align: center;
+        }
+        .info .media .d-flex { display: inline-block !important; }
+        .info .media .mr-3 { margin-right: 0 !important; }
       }
       @media (max-width: 992px) {
         #content {
