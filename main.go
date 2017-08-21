@@ -39,8 +39,8 @@ func HandleWalletGenerator(w http.ResponseWriter, r *http.Request) {
 }
 
 func HandleHome(w http.ResponseWriter, r *http.Request) {
-  t := template.Must(template.ParseFiles("templates/layout.html", "templates/home.html"))
-  t.Execute(w, nil)
+	t := template.Must(template.ParseFiles("templates/layout.html", "templates/home.html"))
+	t.Execute(w, nil)
 }
 
 func RedirectToHTTPSRouter(next http.Handler) http.Handler {
@@ -103,19 +103,13 @@ func GenerateNewSeedAddress() (*Secret, error) {
 	return templateData, nil
 }
 
-func LoaderHandler(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("loaderio-6b41e5868c37b084abcf848f4f65cd3b"))
-}
-
-// getAddress returns an address generated from a seed at the index specified
-// by `index`.
-
 func main() {
+
 	r := mux.NewRouter()
 	// Routes consist of a path and a handler function.
 	r.HandleFunc("/", HandleHome)
 	r.HandleFunc("/wallet", HandleWalletGenerator)
-	r.HandleFunc("/wallet/", HandleWalletGenerator)
+	r.PathPrefix("/").Handler(http.StripPrefix("/assets/", http.FileServer(http.Dir("assets/"))))
 
 	var port string
 	port = os.Getenv("PORT")
