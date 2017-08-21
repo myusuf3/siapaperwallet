@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Sia Paper Wallet</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <style>
+      body {
+        font-family: "Gotham A", "Gotham B", Helvetica, Arial, sans-serif;
+        color: rgba(74, 74, 74, 1);
+      }
+      #content,
+      #donate,
+      #footer {
+        margin: 75px auto;
+        max-width: 900px;
+      }
+      .heading .lead {
+        margin-top: 20px;
+        text-align: justify;
+      }
+      #donate,
+      #footer,
+      section {
+        margin-top: 75px;
+      }
+      .green { color: #00cba0; }
+      h1 {
+        text-align: center;
+      }
+      h1.display-4 img {
+        vertical-align: inherit;
+      }
+      .small-lead {
+        font-size: 16px;
+        overflow-wrap: break-word;
+        display: block;
+        width: 75%;
+        margin: auto;
+      }
+      .generate-wallet-btn {
+        color: white;
+        background-color: rgba(0, 203, 160, 0.85);
+        padding: 0.75em 1.5em;
+        font-size: 1.5em;
+        line-height: 1.5;
+        text-transform: uppercase;
+        border-radius: .3em;
+      }
+      .generate-wallet-btn:hover {
+        color: white;
+        background-color: rgba(0, 203, 160, 1);
+      }
+
+      section.generate-wallet {
+        text-align: center;
+      }
+      #donate {
+        text-align: center;
+      }
+      #footer {
+        color: rgba(74, 74, 74, 0.8);
+      }
+      #footer a {
+        color: rgba(74, 74, 74, 0.8);
+        text-decoration: underline;
+      }
+      #footer a:hover {
+        color: rgba(0, 203, 160, 1);
+      }
+      .thanks,
+      .made-with {
+        font-size: 0.9em;
+        //font-weight: bold;
+        //opacity: 0.5;
+      }
+      .canada-flag-icon:before {
+        content: "";
+        display: inline-block;
+        width: 21px;
+        height: 15px;
+        background: url(https://s3.amazonaws.com/omarshammas.com/img/flagIcons.svg);
+        background-position: -162px -10px;
+        vertical-align: -2px;
+        margin-right: 12px;
+      }
+    </style>
+	</head>
+	<body>
+    <div id="content">
+      {{ template "content" }}
+    </div>
+    <section id="donate">
+      <p class="lead">
+        If you'd like to support us, we'd appreciate your donation!
+        <br/>
+        0a3d87b83777242b5c3f3bee566003c21adb429e52fc46ab01b05ca2ed74102cd5f03a54e690
+      </p>
+    </section>
+    <div id="footer">
+      <div class="lead thanks float-left">Special thanks to team at <a href="http://sia.tech" target="_blank">sia.tech</a></div>
+      <div class="lead made-with float-right">Made in <span class="canada-flag-icon"></span></div>
+      <div class="clearfix"></div>
+    </div>
+	</body>
+</html>

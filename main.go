@@ -30,7 +30,7 @@ type Secret struct {
 }
 
 func HandleWalletGenerator(w http.ResponseWriter, r *http.Request) {
-	t := template.Must(template.ParseFiles("templates/secret.html"))
+	t := template.Must(template.ParseFiles("templates/layout.html", "templates/secret.html"))
 	templateData, err := GenerateNewSeedAddress()
 	if err != nil {
 		log.Fatal(err)
@@ -39,7 +39,8 @@ func HandleWalletGenerator(w http.ResponseWriter, r *http.Request) {
 }
 
 func HandleHome(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Hi! Keep it moving.\n"))
+  t := template.Must(template.ParseFiles("templates/layout.html", "templates/home.html"))
+  t.Execute(w, nil)
 }
 
 func RedirectToHTTPSRouter(next http.Handler) http.Handler {
@@ -113,7 +114,9 @@ func main() {
 	r := mux.NewRouter()
 	// Routes consist of a path and a handler function.
 	r.HandleFunc("/", HandleHome)
+	r.HandleFunc("/wallet", HandleWalletGenerator)
 	r.HandleFunc("/wallet/", HandleWalletGenerator)
+
 	var port string
 	port = os.Getenv("PORT")
 
