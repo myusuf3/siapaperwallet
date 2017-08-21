@@ -42,6 +42,13 @@
         font-weight: 300;
         overflow-wrap: break-word;
       }
+      .dark-link {
+        color: rgba(74, 74, 74, 0.8);
+        text-decoration: underline;
+      }
+      .dark-link:hover {
+        color: rgba(0, 203, 160, 1);
+      }
       p.small {
         font-size: 16px;
         display: block;
@@ -71,13 +78,6 @@
       }
       #footer {
         color: rgba(74, 74, 74, 0.8);
-      }
-      #footer a {
-        color: rgba(74, 74, 74, 0.8);
-        text-decoration: underline;
-      }
-      #footer a:hover {
-        color: rgba(0, 203, 160, 1);
       }
       .thanks,
       .made-with {
@@ -169,7 +169,7 @@
       </p>
     </section>
     <div id="footer">
-      <p class="thanks float-left">Special thanks to team at <a href="http://sia.tech" target="_blank">sia.tech</a></p>
+      <p class="thanks float-left">Special thanks to team at <a class="dark-link" href="http://sia.tech" target="_blank">sia.tech</a></p>
       <p class="made-with float-right">Made in <span class="canada-flag-icon"></span></p>
       <div class="clearfix"></div>
     </div>
