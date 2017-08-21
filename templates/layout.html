@@ -17,7 +17,7 @@
         margin: 75px auto;
         max-width: 900px;
       }
-      .heading .lead {
+      .heading {
         margin-top: 20px;
         text-align: justify;
       }
@@ -33,9 +33,13 @@
       h1.display-4 img {
         vertical-align: inherit;
       }
-      .small-lead {
-        font-size: 16px;
+      p {
+        font-size: 1.25rem;
+        font-weight: 300;
         overflow-wrap: break-word;
+      }
+      p.small {
+        font-size: 16px;
         display: block;
         width: 75%;
         margin: auto;
@@ -86,6 +90,48 @@
         vertical-align: -2px;
         margin-right: 12px;
       }
+
+      .break-mobile {
+        display: none;
+      }
+
+      @media (max-width: 750px) {
+        .break-mobile {
+          display: block;
+        }
+      }
+      @media (max-width: 992px) {
+        #content {
+          margin-top: 20px;
+          margin-bottom: 20px;
+        }
+
+        #donate,
+        #footer,
+        section {
+          margin-top: 40px;
+          margin-bottom: 40px;
+        }
+
+        .heading,
+        #donate,
+        #footer,
+        section {
+          padding: 0 10px;
+        }
+        h1 {
+          margin-bottom: 20px;
+        }
+        .heading {
+          margin-top: 0;
+        }
+        p {
+          font-size: 0.9em;
+        }
+        #donate {
+          text-align: left;
+        }
+      }
     </style>
 	</head>
 	<body>
@@ -93,15 +139,15 @@
       {{ template "content" }}
     </div>
     <section id="donate">
-      <p class="lead">
+      <p>
         If you'd like to support us, we'd appreciate your donation!
         <br/>
         0a3d87b83777242b5c3f3bee566003c21adb429e52fc46ab01b05ca2ed74102cd5f03a54e690
       </p>
     </section>
     <div id="footer">
-      <div class="lead thanks float-left">Special thanks to team at <a href="http://sia.tech" target="_blank">sia.tech</a></div>
-      <div class="lead made-with float-right">Made in <span class="canada-flag-icon"></span></div>
+      <p class="thanks float-left">Special thanks to team at <a href="http://sia.tech" target="_blank">sia.tech</a></p>
+      <p class="made-with float-right">Made in <span class="canada-flag-icon"></span></p>
       <div class="clearfix"></div>
     </div>
 	</body>
