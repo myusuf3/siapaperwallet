@@ -18,6 +18,9 @@ import (
 
 const addressCount = 20
 
+var homeTemplate = template.Must(template.ParseFiles("templates/layout.html", "templates/home.html"))
+var secretTemplate = template.Must(template.ParseFiles("templates/layout.html", "templates/secret.html"))
+
 type AddressPair struct {
 	Address      types.UnlockHash
 	AddressImage string
@@ -30,17 +33,12 @@ type Secret struct {
 }
 
 func HandleWalletGenerator(w http.ResponseWriter, r *http.Request) {
-	t := template.Must(template.ParseFiles("templates/layout.html", "templates/secret.html"))
-	templateData, err := GenerateNewSeedAddress()
-	if err != nil {
-		log.Fatal(err)
-	}
-	t.Execute(w, templateData)
+	templateData := generateNewSeed()
+	secretTemplate.Execute(w, templateData)
 }
 
 func HandleHome(w http.ResponseWriter, r *http.Request) {
-	t := template.Must(template.ParseFiles("templates/layout.html", "templates/home.html"))
-	t.Execute(w, nil)
+	homeTemplate.Execute(w, nil)
 }
 
 func RedirectToHTTPSRouter(next http.Handler) http.Handler {
@@ -56,7 +54,7 @@ func RedirectToHTTPSRouter(next http.Handler) http.Handler {
 	})
 }
 
-func getAddress(seed modules.Seed, index uint64) types.UnlockHash {
+func generateAddress(seed modules.Seed, index uint64) types.UnlockHash {
 	_, pk := crypto.GenerateKeyPairDeterministic(crypto.HashAll(seed, index))
 	return types.UnlockConditions{
 		PublicKeys:         []types.SiaPublicKey{types.Ed25519PublicKey(pk)},
@@ -64,15 +62,14 @@ func getAddress(seed modules.Seed, index uint64) types.UnlockHash {
 	}.UnlockHash()
 }
 
-func GenerateNewSeedAddress() (*Secret, error) {
+func generateNewSeed() *Secret {
 	var seed modules.Seed
 	fastrand.Read(seed[:])
 	var addressesPairs []AddressPair
 	var png []byte
 	seedStr, err := modules.SeedToString(seed, "english")
 	if err != nil {
-		log.Print(err)
-		return nil, err
+		log.Fatal(err)
 	}
 	png, err = qrcode.Encode(seedStr, qrcode.Low, 256)
 	if err != nil {
@@ -81,7 +78,7 @@ func GenerateNewSeedAddress() (*Secret, error) {
 	seedImage := base64.StdEncoding.EncodeToString(png)
 
 	for i := uint64(0); i < addressCount; i++ {
-		address := getAddress(seed, i)
+		address := generateAddress(seed, i)
 
 		png, err := qrcode.Encode(address.String(), qrcode.Low, 256)
 		if err != nil {
@@ -100,7 +97,7 @@ func GenerateNewSeedAddress() (*Secret, error) {
 		SeedImage:    seedImage,
 		AddressPairs: addressesPairs,
 	}
-	return templateData, nil
+	return templateData
 }
 
 func main() {
@@ -118,7 +115,7 @@ func main() {
 		port = "8080"
 	}
 
-	domain := fmt.Sprintf(":%s", port)
+	domain := ":" + port
 
 	finalRouter := RedirectToHTTPSRouter(r)
 
