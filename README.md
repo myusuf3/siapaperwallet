@@ -28,5 +28,7 @@ Peace and Prosper. Special Thanks to sia.tech team!
 Donations:
 
 BTC: 1647cYyyofoCtKn1cs5P9sTUTA4rhhqvhZ
+
 LTC: LMB5hTL8kVvFfXzmqtFKFpdc1EY64Mtmpb
+
 SC: 0a3d87b83777242b5c3f3bee566003c21adb429e52fc46ab01b05ca2ed74102cd5f03a54e690
