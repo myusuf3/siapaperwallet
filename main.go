@@ -105,22 +105,23 @@ func GenerateNewSeedAddress() (*Secret, error) {
 
 func main() {
 
+	var port string
+	port = os.Getenv("PORT")
+
 	r := mux.NewRouter()
-	// Routes consist of a path and a handler function.
+
 	r.HandleFunc("/", HandleHome)
 	r.HandleFunc("/wallet", HandleWalletGenerator)
 	r.PathPrefix("/").Handler(http.StripPrefix("/assets/", http.FileServer(http.Dir("assets/"))))
 
-	var port string
-	port = os.Getenv("PORT")
-
 	if port == "" {
 		port = "8080"
 	}
+
 	domain := fmt.Sprintf(":%s", port)
-	log.Print(domain)
 
 	finalRouter := RedirectToHTTPSRouter(r)
-	// Bind to a port and pass our router in
+
+	// Fasten to port and pass in routes
 	log.Fatal(http.ListenAndServe(domain, finalRouter))
 }
