@@ -7,9 +7,7 @@ Allow users to create and store their siacoin on a paper wallet.
 
 # Contribution
 
-We have some what clear roadmap of where we would like things to progress
-if you have suggests and improvements we are open to hearing them and
-collaborating.
+We have some what clear roadmap of where we would like things to progress! If you have suggests and improvements we are open to hearing them and collaborating.
 
 Some low hanging fruit for new contributors:
 
@@ -19,11 +17,9 @@ Some low hanging fruit for new contributors:
 
 # Usage
 
-Simply go to the site and generate a new wallet. Keep it private. Print it off.
-Please be sure to do so – once you leave its gone forever. I would also test a
-small amount before you do so, because you know we are human and mistakes happen.
+Simply go to the site and generate a new wallet. Keep it private. Print it off. Please be sure to do so – once you leave its gone forever. I would also test a small amount before you do so, because you know we are human and mistakes happen.
 
-Peace and Prosper. Special Thanks to sia.tech team!
+Special Thanks to [sia.tech](http://sia.tech/) team!
 
 Donations:
 
