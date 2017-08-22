@@ -21,15 +21,15 @@ const addressCount = 20
 var homeTemplate = template.Must(template.ParseFiles("templates/layout.html", "templates/home.html"))
 var secretTemplate = template.Must(template.ParseFiles("templates/layout.html", "templates/secret.html"))
 
-type AddressPair struct {
+type addressPair struct {
 	Address      types.UnlockHash
 	AddressImage string
 }
 
-type Secret struct {
+type secret struct {
 	Seed         string
 	SeedImage    string
-	AddressPairs []AddressPair
+	AddressPairs []addressPair
 }
 
 func HandleWalletGenerator(w http.ResponseWriter, r *http.Request) {
@@ -62,10 +62,10 @@ func generateAddress(seed modules.Seed, index uint64) types.UnlockHash {
 	}.UnlockHash()
 }
 
-func generateNewSeed() *Secret {
+func generateNewSeed() *secret {
 	var seed modules.Seed
 	fastrand.Read(seed[:])
-	var addressesPairs []AddressPair
+	var addressesPairs []addressPair
 	var png []byte
 	seedStr, err := modules.SeedToString(seed, "english")
 	if err != nil {
@@ -85,14 +85,14 @@ func generateNewSeed() *Secret {
 			log.Fatal(err)
 		}
 		imageAddress := base64.StdEncoding.EncodeToString(png)
-		addressPair := AddressPair{
+		addressPair := addressPair{
 			Address:      address,
 			AddressImage: imageAddress,
 		}
 		addressesPairs = append(addressesPairs, addressPair)
 	}
 
-	templateData := &Secret{
+	templateData := &secret{
 		Seed:         seedStr,
 		SeedImage:    seedImage,
 		AddressPairs: addressesPairs,
