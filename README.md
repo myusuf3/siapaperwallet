@@ -1,4 +1,4 @@
-# siapaperwallet.co
+# About
 One stop shop to create sia paper wallet.
 
 # Purpose
