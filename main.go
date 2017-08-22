@@ -16,7 +16,7 @@ import (
 	"github.com/skip2/go-qrcode"
 )
 
-const nAddresses = 20
+const addressCount = 20
 
 type AddressPair struct {
 	Address      types.UnlockHash
@@ -80,7 +80,7 @@ func GenerateNewSeedAddress() (*Secret, error) {
 	}
 	seedImage := base64.StdEncoding.EncodeToString(png)
 
-	for i := uint64(0); i < nAddresses; i++ {
+	for i := uint64(0); i < addressCount; i++ {
 		address := getAddress(seed, i)
 
 		png, err := qrcode.Encode(address.String(), qrcode.Low, 256)
